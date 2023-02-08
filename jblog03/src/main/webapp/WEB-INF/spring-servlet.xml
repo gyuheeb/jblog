@@ -25,6 +25,18 @@
 	<!-- Default Servlet Handler -->
 	<mvc:default-servlet-handler />
 
+	<!-- interceptor 설정  -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/login"/>
+			<bean id="LoginInterceptor" class="com.douzone.jblog.security.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/index"/>
+			<bean id="LogoutInterceptor" class="com.douzone.jblog.security.LogoutInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 
 	<!-- ViewResolver -->
 	<bean id="viewResolver"
@@ -54,6 +66,5 @@
 		
 
 	<context:annotation-config />
-   <context:component-scan base-package="com.douzone.jblog.controller" />
-
+    <context:component-scan base-package="com.douzone.jblog.controller" />
 </beans>
