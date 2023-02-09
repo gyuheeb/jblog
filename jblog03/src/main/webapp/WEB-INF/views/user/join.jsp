@@ -20,7 +20,7 @@
 			</c:when>
 			<c:otherwise>
 					<li><a href="${pageContext.request.contextPath}/index">로그아웃</a></li>
-					<li><a href="${pageContext.request.contextPath}/blog/main/id=${authUser.id}">내블로그</a></li><br>
+					<li><a href="${pageContext.request.contextPath}/blog/main/id=${authUser.id}">내블로그</a></li>
 					<li><p>${authUser.name }님 안녕하세요 ʕ ᵔᴥᵔ ʔ</p></li>
 			</c:otherwise>
 			</c:choose>

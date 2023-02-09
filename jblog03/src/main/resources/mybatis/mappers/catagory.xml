@@ -2,13 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="catagory">
 
-	<insert id="insert" parameterType="catagoryvo" >
+		<insert id="insert" parameterType="catagoryvo" >
+			<![CDATA[
+				insert into catagory values(null,"main카테고리",#{id})	
+			]]>		
+		</insert>	
+	
+	
+		<select id="categoryfind" parameterType="String" resultType="catagoryvo">
 		<![CDATA[
-			insert into catagory values(null,"기본값",#{id})	
-		]]>		
-	</insert>	
+			select * from catagory where id =#{id}
+		]]>
+		</select>
 	
+		<insert id="catagoryinsert" parameterType="catagoryvo" >
+			<![CDATA[
+				insert into catagory values(null,#{name},#{id})	
+			]]>		
+		</insert>	
 	
-
+		<delete id="delete" parameterType="long" >
+			<![CDATA[
+				delete from catagory where no=#{no}
+			]]>		
+		</delete>	
 	
 </mapper>
