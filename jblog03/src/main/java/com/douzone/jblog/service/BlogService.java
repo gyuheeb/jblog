@@ -1,10 +1,8 @@
 package com.douzone.jblog.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.douzone.jblog.repository.BlogRepository;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CatagoryVo;
@@ -53,6 +51,20 @@ public class BlogService {
 	public List<PostVo> findpost() {
 		return blogRepository.findpost();
 	}
+
+
+	public List<PostVo> findCatagorypost(Long no){
+		return blogRepository.findCatagorypost(no);
+	}
+
+
+	public PostVo findpostNo(Long no2) {
+		return blogRepository.findpostNo(no2);
+		
+	}
+
+
+	
 
 
 

@@ -12,7 +12,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
+			<h1>${blogVo.title }</h1>
 			<ul>
 			<c:choose>
 			<c:when test="${empty authUser }">
@@ -20,7 +20,7 @@
 			</c:when>
 			<c:otherwise>
 					<li><a href="${pageContext.request.contextPath}/index">로그아웃</a></li>
-					<li><a href="${pageContext.request.contextPath}/blog/admin-basic/id=${id}">블로그 관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/${id}/blog/main">블로그 첫 화면으로</a></li>
 			</c:otherwise>
 			</c:choose>
 			</ul>
@@ -28,21 +28,21 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath }/blog/admin-basic/id=${id}">기본설정</a></li>
-					<li><a href="${pageContext.request.contextPath }/blog/admin-category/id=${id}">카테고리</a></li>
+					<li><a href="${pageContext.request.contextPath }/${id}/blog/admin-basic">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath }/${id}/blog/admin-category">카테고리</a></li>
 					<li class="selected">글작성</li>
 				</ul>
-				<form action="${pageContext.request.contextPath }/blog/admin-write/id=${id}" method="post">
+				<form action="${pageContext.request.contextPath }/${id}/blog/admin-write" method="post">
 			      	<table class="admin-cat-write">
 			      		<tr>
 			      			<td class="t">제목</td>
 			      			<td>
 			      				
 			      					<input type="text" size="60" name="title">
-				      				<select name="category">
+				      				<select name="catagory_no">
 				      				<c:set var="count" value="${fn:length(list)} }" />
 			      					<c:forEach items="${list }"	var="vo" varStatus="status">
-				      				<option>${vo.name}</option>
+				      				<option value="${vo.no }">${vo.name}</option>
 				      				</c:forEach>
 				      				</select>
 				      			

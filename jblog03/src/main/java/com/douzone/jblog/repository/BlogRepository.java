@@ -1,6 +1,7 @@
 package com.douzone.jblog.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,21 @@ public class BlogRepository {
 	public List<PostVo> findpost() {
 		List<PostVo> list = sqlSession.selectList("post.findpost");
 		return list;
+	}
+
+
+
+
+
+	public List<PostVo> findCatagorypost(Long no) {
+		List<PostVo> list = sqlSession.selectList("post.findCatagorypost",no);
+		return list;
+	}
+
+
+	public PostVo findpostNo(Long no2) {
+		return sqlSession.selectOne("post.findpostNo",no2);
+		
 	}
 
 

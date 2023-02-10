@@ -1,9 +1,9 @@
 package com.douzone.jblog.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import com.douzone.jblog.vo.PostVo;
 
 
 @Controller
-@RequestMapping("/blog")
+@RequestMapping("/{id:(?!assets).*}/blog")
 public class BlogController {
 	
 	@Autowired
@@ -32,42 +32,60 @@ public class BlogController {
 	@Autowired
 	private ServletContext servletContext;
 	
-	@RequestMapping(value="/main/id={id}", method=RequestMethod.GET)
-	public String main(@PathVariable("id") String id ,Model model) {
-		BlogVo blogvo = blogService.findAll(id);
-		List<PostVo> postlist= blogService.findpost();
-		List<CatagoryVo> catagorylist = blogService.categoryfind(id);
-		model.addAttribute("blogVo",blogvo);
-		model.addAttribute("postlist",postlist);
-		model.addAttribute("catagorylist",catagorylist);
-		model.addAttribute("id",id);
+	// 블로그 메인 페이지 출력
+	@RequestMapping({"/main","/main/category={cno}","/main/category={cno}/post={pno}"})
+	public String main(@PathVariable("id") String id, @PathVariable("cno") Optional<Long> cno, 
+			@PathVariable("pno") Optional<Long> pno ,Model model) {
+			BlogVo blogvo = blogService.findAll(id);  // 프로필 구현
+
+		if(pno.isPresent()) {
+			
+			List<CatagoryVo> catagorylist = blogService.categoryfind(id);//카테고리 구현
+			Long no = cno.get();
+			List<PostVo> postcatagorylist= blogService.findCatagorypost(no); //카테고리No에 따른 Post list출력
+			Long no2 = pno.get();
+			System.out.println(no2+"ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+			PostVo vo =blogService.findpostNo(no2);
+			
+			System.out.println(vo);
+			model.addAttribute("vo",vo);
+			model.addAttribute("blogVo",blogvo);
+			model.addAttribute("postcatagorylist",postcatagorylist);
+			model.addAttribute("catagorylist",catagorylist);
+			model.addAttribute("id",id);
+			
+			
+			
+			
+		}else if(cno.isPresent()) {
+			
+			List<CatagoryVo> catagorylist = blogService.categoryfind(id);//카테고리 구현
+			Long no = cno.get();
+			List<PostVo> postcatagorylist= blogService.findCatagorypost(no); //카테고리No에 따른 Post list출력
+			model.addAttribute("blogVo",blogvo);
+			model.addAttribute("postcatagorylist",postcatagorylist);
+			model.addAttribute("catagorylist",catagorylist);
+			model.addAttribute("id",id);
+			
+			
+			
+		}else {
+			List<CatagoryVo> catagorylist = blogService.categoryfind(id); //카테고리 구현
+			List<PostVo> postlist= blogService.findpost(); //게시글 구현
+	
+			model.addAttribute("blogVo",blogvo);
+			model.addAttribute("postlist",postlist);
+			model.addAttribute("catagorylist",catagorylist);
+			model.addAttribute("id",id);
+			
+		}
+		
 		return "blog/main";
 	}
-	//
-	@RequestMapping(value="/main/id={id}/title={title}", method=RequestMethod.GET)
-	public String mainprint(@PathVariable("id") String id
-			,@PathVariable("title") String title ,Model model) {
-		List<PostVo> postlist= blogService.findpost();
-		System.out.println("postlist"+ postlist);
-		model.addAttribute("postlist",postlist);
-		model.addAttribute("id",id);
-		model.addAttribute("title",title);
-		return "blog/main/id="+id +"/title="+title;
-	}
+
 	
-	@RequestMapping(value="/main/id={id}/title={title}", method=RequestMethod.POST)
-	public String main(@PathVariable("id") String id
-			,@PathVariable("title") String title ,Model model) {
-		List<PostVo> postlist= blogService.findpost();
-		System.out.println("postlist"+ postlist);
-		model.addAttribute("postlist",postlist);
-		model.addAttribute("id",id);
-		model.addAttribute("title",title);
-		return "redirect:/blog/main/id="+id +"/title="+title;
-	}
-	
-	
-	@RequestMapping(value="/admin-basic/id={id}")
+	// 관리페이지
+	@RequestMapping(value="/admin-basic")
 	public String basic(@PathVariable("id") String id, Model model) {
 		BlogVo blogvo = blogService.findAll(id);
 		model.addAttribute("blogVo",blogvo);
@@ -75,7 +93,7 @@ public class BlogController {
 		return "blog/admin-basic";
 	}
 	
-	@RequestMapping(value="/upload/id={id}", method=RequestMethod.POST)
+	@RequestMapping(value="/upload", method=RequestMethod.POST)
 	public String basic(@PathVariable("id") String id,BlogVo vo,@RequestParam("file") MultipartFile file) {
 		String profile = fileuploadService.restore(file);
 	
@@ -88,43 +106,53 @@ public class BlogController {
 		blogService.updateprofile(vo);
 		System.out.println("after"+vo);
 		servletContext.setAttribute("blogVo", vo);
-		return "redirect:/blog/admin-basic/id="+id ;
+		return "redirect:/"+id+"/blog/admin-basic";
 	}
 	
-	@RequestMapping(value="/admin-write/id={id}",method=RequestMethod.GET)
+	@RequestMapping(value="/admin-write",method=RequestMethod.GET)
 	public String write(@PathVariable("id") String id,Model model) {
+		BlogVo blogvo = blogService.findAll(id);
+		model.addAttribute("blogVo",blogvo);
 		List<CatagoryVo> list = blogService.categoryfind(id);
 		model.addAttribute("list", list);
 		return "blog/admin-write";
 	}
 	
-	@RequestMapping(value="/admin-write/id={id}",method=RequestMethod.POST)
+	@RequestMapping(value="/admin-write",method=RequestMethod.POST)
 	public String write(@PathVariable("id") String id,Model model,PostVo vo) {
+		BlogVo blogvo = blogService.findAll(id);
+		model.addAttribute("blogVo",blogvo);
 			blogService.wirte(vo);	
-		return "redirect:/blog/admin-write/id="+id;
+		return "redirect:/"+id+"/blog/admin-write";
 	}
 	
-	@RequestMapping("/admin-category/id={id}")
+	@RequestMapping("/admin-category")
 	public String category(@PathVariable("id") String id, Model model) {
+		BlogVo blogvo = blogService.findAll(id);
+		model.addAttribute("blogVo",blogvo);
 		List<CatagoryVo> list = blogService.categoryfind(id);
 		model.addAttribute("list", list);
 		model.addAttribute("id", id);
 		return "blog/admin-category";
 	}
 	
-	@RequestMapping(value="/admin-category/id={id}", method=RequestMethod.POST)
+	@RequestMapping(value="/admin-category", method=RequestMethod.POST)
 	public String categoryinsert(@PathVariable("id") String id, Model model,CatagoryVo vo) {
+		BlogVo blogvo = blogService.findAll(id);
+		model.addAttribute("blogVo",blogvo);
 		blogService.catagoryinsert(vo);
 		
-		return "redirect:/blog/admin-category/id="+id;
+		return "redirect:/"+id+"/blog/admin-category";
 	}
 	
-	@RequestMapping(value="/admin-category/id={id}/delete={no}")
-	public String delete(@PathVariable("id") String id,@PathVariable("no") Long no) {
+	@RequestMapping(value="/admin-category/delete={no}")
+	public String delete(@PathVariable("id") String id,@PathVariable("no") Long no,Model model) {
+		BlogVo blogvo = blogService.findAll(id);
+		model.addAttribute("blogVo",blogvo);
 		
 		blogService.delete(no);
 		
-		return "redirect:/blog/admin-category/id="+id;
+		return "redirect:/"+id+"/blog/admin-category";
 	}
 	
 	

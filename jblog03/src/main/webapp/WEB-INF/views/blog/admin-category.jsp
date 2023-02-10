@@ -12,7 +12,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
+			<h1>${blogVo.title }</h1>
 			<ul>
 				<c:choose>
 			<c:when test="${empty authUser }">
@@ -20,7 +20,7 @@
 			</c:when>
 			<c:otherwise>
 					<li><a href="${pageContext.request.contextPath}/index">로그아웃</a></li>
-					<li><a href="${pageContext.request.contextPath}/blog/admin-basic/id=${id}">블로그 관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/${id}/blog/main">블로그 첫 화면으로</a></li>
 			</c:otherwise>
 			</c:choose>
 			</ul>
@@ -28,9 +28,9 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath }/blog/admin-basic/id=${id}">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath }/${id}/blog/admin-basic">기본설정</a></li>
 					<li class="selected">카테고리</li>
-					<li><a href="${pageContext.request.contextPath }/blog/admin-write/id=${id}">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath }/${id}/blog/admin-write">글작성</a></li>
 				</ul>
 		      	<table class="admin-cat">
 		      		<tr>
@@ -50,7 +50,7 @@
 							<td>
 							<c:choose>
 									<c:when test="${list.size() > 1 }">
-										<a href="${pageContext.request.contextPath }/blog/admin-category/id=${id}/delete=${vo.no}" class="del">
+										<a href="${pageContext.request.contextPath }/${id}/blog/admin-category/delete=${vo.no}" class="del">
 										<img src="${pageContext.request.contextPath}/assets/images/delete.jpg" class="del"></a>
 									</c:when>
 									<c:otherwise>
@@ -65,7 +65,7 @@
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-      			<form action="${pageContext.request.contextPath }/blog/admin-category/id=${id}" method="post"  enctype="multipart/form-data">
+      			<form action="${pageContext.request.contextPath }/${id}/blog/admin-category" method="post"  enctype="multipart/form-data">
 		      	<table id="admin-cat-add">
 		      
 		      		<tr>

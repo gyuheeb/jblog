@@ -4,7 +4,7 @@
 
 	<insert id="write" parameterType="postvo" >
 		<![CDATA[
-			insert into post values (null,#{title},#{contents},now(),1)
+			insert into post values (null,#{title},#{contents},now(),#{catagory_no})
 
 		]]>		
 	</insert>	
@@ -15,5 +15,16 @@
 		]]>		
 	</select>	
 	
+	<select id="findCatagorypost" parameterType="long" resultType="postvo" >
+		<![CDATA[
+			select * from post where catagory_no = #{no}
+		]]>		
+	</select>
+	
+	<select id="findpostNo" parameterType="long" resultType="postvo">
+		<![CDATA[
+			select title,contents from post where no = #{no2}
+		]]>		
+	</select>
 	
 </mapper>
