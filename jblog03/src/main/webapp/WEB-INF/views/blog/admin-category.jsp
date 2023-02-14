@@ -45,18 +45,18 @@
 			      		<tr>
 							<td>${vo.no} </td>
 							<td>${vo.name}</td>
-							<td>0</td>
-							<td>2</td>
+							<td>${vo.postcount }</td>
+							<td>설 명</td>
 							<td>
 							<c:choose>
-									<c:when test="${list.size() > 1 }">
+									<c:when test="${list.size() > 1 && vo.postcount < 1}">
 										<a href="${pageContext.request.contextPath }/${id}/blog/admin-category/delete=${vo.no}" class="del">
 										<img src="${pageContext.request.contextPath}/assets/images/delete.jpg" class="del"></a>
 									</c:when>
 									<c:otherwise>
 										&nbsp;
 									</c:otherwise>
-								</c:choose>
+							</c:choose>
 							</td>
 						</tr>  
 		  		</c:forEach>

@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -15,11 +16,11 @@ public class GlobalExceptionHandler {
 	private static final Log logger = LogFactory.getLog(GlobalExceptionHandler.class);
 	@ExceptionHandler(Exception.class)
 	public ModelAndView handlerException(Exception e) {
-//		if(e instanceof NoHandlerFoundException) {
-//			ModelAndView mav = new ModelAndView();
-//			mav.setViewName("error/404");
-//			return mav;
-//		}
+		if(e instanceof NoHandlerFoundException) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("error/404");
+			return mav;
+		}
 		//1.로깅(Logging)
 		StringWriter errors= new StringWriter(); //타겟이 string 개체안에 이는 buffer
 		e.printStackTrace(new PrintWriter(errors));

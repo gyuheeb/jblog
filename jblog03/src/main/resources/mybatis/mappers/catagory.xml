@@ -11,9 +11,10 @@
 	
 		<select id="categoryfind" parameterType="String" resultType="catagoryvo">
 		<![CDATA[
-			select * from catagory where id =#{id}
+			select a.no, a.name, a.id, count(b.no) as postcount from catagory a left join post b on a.no = b.catagory_no where id = #{id} group by a.no order by a.no asc 
 		]]>
 		</select>
+		
 	
 		<insert id="catagoryinsert" parameterType="catagoryvo" >
 			<![CDATA[
@@ -26,5 +27,6 @@
 				delete from catagory where no=#{no}
 			]]>		
 		</delete>	
+
 	
 </mapper>
