@@ -149,7 +149,7 @@ public class BlogController {
 	public String delete(@PathVariable("id") String id,@PathVariable("no") Long no,Model model) {
 		BlogVo blogvo = blogService.findAll(id);
 		model.addAttribute("blogVo",blogvo);
-		System.out.println(no);
+		
 		blogService.delete(no);
 		
 		return "redirect:/"+id+"/blog/admin-category";

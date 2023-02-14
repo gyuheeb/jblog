@@ -22,8 +22,6 @@ public class CatagoryVo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-
 	@Override
 	public String toString() {
 		return "CatagoryVo [no=" + no + ", id=" + id + ", name=" + name + "]";
