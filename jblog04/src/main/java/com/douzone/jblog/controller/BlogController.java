@@ -140,8 +140,8 @@ public class BlogController {
 	public String categoryinsert(@PathVariable("id") String id, Model model,CatagoryVo vo) {
 		BlogVo blogvo = blogService.findAll(id);
 		model.addAttribute("blogVo",blogvo);
-		blogService.catagoryinsert(vo);
 		
+		blogService.catagoryinsert(vo);
 		return "redirect:/"+id+"/blog/admin-category";
 	}
 	
@@ -149,7 +149,7 @@ public class BlogController {
 	public String delete(@PathVariable("id") String id,@PathVariable("no") Long no,Model model) {
 		BlogVo blogvo = blogService.findAll(id);
 		model.addAttribute("blogVo",blogvo);
-		
+		System.out.println(no);
 		blogService.delete(no);
 		
 		return "redirect:/"+id+"/blog/admin-category";

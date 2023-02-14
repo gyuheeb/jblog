@@ -4,6 +4,7 @@ public class CatagoryVo {
 	private Long no;
 	private String id;
 	private String name;
+	private Long postcount;
 	public Long getNo() {
 		return no;
 	}
@@ -22,9 +23,17 @@ public class CatagoryVo {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+
+	public Long getPostcount() {
+		return postcount;
+	}
+	public void setPostcount(Long postcount) {
+		this.postcount = postcount;
+	}
 	@Override
 	public String toString() {
-		return "CatagoryVo [no=" + no + ", id=" + id + ", name=" + name + "]";
+		return "CatagoryVo [no=" + no + ", id=" + id + ", name=" + name + ", postcount=" + postcount + "]";
 	}
 	
 	

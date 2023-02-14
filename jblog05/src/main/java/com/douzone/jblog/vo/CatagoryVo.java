@@ -5,7 +5,6 @@ public class CatagoryVo {
 	private String id;
 	private String name;
 	private Long postcount;
-	
 	public Long getNo() {
 		return no;
 	}
@@ -25,6 +24,7 @@ public class CatagoryVo {
 		this.name = name;
 	}
 	
+
 	public Long getPostcount() {
 		return postcount;
 	}
