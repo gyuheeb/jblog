@@ -1,7 +1,6 @@
 package com.douzone.jblog.config;
 
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -36,7 +35,7 @@ public class WebConfig implements WebMvcConfigurer{
 		
 		registry
 			.addInterceptor(logoutInterceptor())
-			.addPathPatterns("/index");
+			.addPathPatterns("/user/logout");
 
 	}
 	

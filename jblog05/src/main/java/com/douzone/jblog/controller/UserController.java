@@ -37,7 +37,10 @@ public class UserController {
 		public String login() {
 			return "user/login";
 		}
-	
+	@RequestMapping("/logout")
+	public String logout() {
+		return "redirect:/";
+	}
 
 	
 	
