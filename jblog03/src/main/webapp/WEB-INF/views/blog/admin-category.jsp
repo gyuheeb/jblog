@@ -47,21 +47,17 @@
 							<td>${vo.name}</td>
 							<td>${vo.postcount }</td>
 							<td>설 명</td>
-							
+							<td>
 							<c:choose>
 								<c:when test="${list.size() > 1 && vo.postcount < 1}">
-								<td>
 										<a href="${pageContext.request.contextPath }/${id}/blog/admin-category/delete=${vo.no}">
 										<img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
-											</td>
 									</c:when>
 									<c:otherwise>
-									<td>
 										&nbsp;
-									</td>
 									</c:otherwise>
 							</c:choose>
-						
+							</td>
 						</tr>  
 		  		</c:forEach>
 					

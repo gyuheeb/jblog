@@ -48,7 +48,7 @@ public class FileuploadService {
 			os.write(data);
 			os.close();
 			
-			url = env.getProperty("fileupload.resourceurl") + "/" + saveFilename; 
+			url = env.getProperty("fileupload.resourceUrl") + "/" + saveFilename; 
 		} catch(IOException ex) {
 			throw new FileuploadServiceException(ex.toString());
 		}
