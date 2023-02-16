@@ -50,8 +50,8 @@
 							<td>
 							<c:choose>
 									<c:when test="${list.size() > 1 && vo.postcount < 1}">
-										<a href="${pageContext.request.contextPath }/${id}/blog/admin-category/delete=${vo.no}" class="del">
-										<img src="${pageContext.request.contextPath}/assets/images/delete.jpg" class="del"></a>
+										<a href="${pageContext.request.contextPath }/${id}/blog/admin-category/delete=${vo.no}">
+										<img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
 									</c:when>
 									<c:otherwise>
 										&nbsp;
