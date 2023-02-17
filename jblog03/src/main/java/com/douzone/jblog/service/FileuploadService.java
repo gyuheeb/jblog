@@ -12,8 +12,8 @@ import com.douzone.jblog.exception.FileuploadServiceException;
 
 @Service
 public class FileuploadService {
-	private static String SAVE_PATH = "/jblog-uploads";
-	private static String URL_PATH = "/assets/images";
+	private final static String SAVE_PATH="/jblog-uploads/upload-images";
+	private final static String URL_PATH="/assets/upload-images";
 	
 	public String restore(MultipartFile file) {
 		String url = null;
