@@ -37,7 +37,7 @@ public class BlogController {
 	public String main(@PathVariable("id") String id, @PathVariable("cno") Optional<Long> cno, 
 			@PathVariable("pno") Optional<Long> pno ,Model model) {
 			BlogVo blogvo = blogService.findAll(id);  // 프로필 구현
-
+			System.out.println("사진"+blogvo);
 		if(pno.isPresent()) {
 			
 			List<CatagoryVo> catagorylist = blogService.categoryfind(id);//카테고리 구현

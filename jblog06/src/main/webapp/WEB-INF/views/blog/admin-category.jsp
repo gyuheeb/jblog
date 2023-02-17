@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JBlog</title>
+<title>${blogVo.title }</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
 					<li><a href="${pageContext.request.contextPath }/user/login">로그인</a><li>
 			</c:when>
 			<c:otherwise>
-					<li><a href="${pageContext.request.contextPath}/index">로그아웃</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
 					<li><a href="${pageContext.request.contextPath}/${id}/blog/main">블로그 첫 화면으로</a></li>
 			</c:otherwise>
 			</c:choose>
