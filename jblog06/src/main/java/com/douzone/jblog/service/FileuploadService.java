@@ -5,10 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.douzone.jblog.exception.FileuploadServiceException;
@@ -18,7 +14,7 @@ import com.douzone.jblog.exception.FileuploadServiceException;
 public class FileuploadService {
 	
 	private final static String SAVE_PATH="/jblog-uploads/upload-images";
-	private final static String URL_PATH="/assets/images";
+	private final static String URL_PATH="/assets/upload-images";
 	
 	public String restore(MultipartFile file) {
 		String url = null;
